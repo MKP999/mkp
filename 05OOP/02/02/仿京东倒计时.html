@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>仿京东倒计时器</title>
+    <style>
+        .stage{
+            width: 200px;   
+            height: 300px;
+            background: #e83632;
+            text-align: center;
+            padding: 20px;
+        }
+        .stage h1{
+            color: white;
+        }
+        .stage h3{
+            color: gray;
+        }
+        .stage h5{
+            color: white;
+            font-family: '宋体';
+        }
+        .stage i{
+            margin: 10px 80px;
+            width: 40px;
+            height: 80px;
+            display: block;
+            background: url('./02/seckill.png');
+            background-position-x: 40px;
+        }
+        .stage .count span{
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            width: 30px;
+            height: 60px;
+            padding: 5px;
+            background: #2f3430;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <h1>倒计时</h1>
+        <h3>COUNT DOWN</h3>
+        <i></i>
+        <h5>距离双11开始还有</h5>
+        <div class="count">
+            <span class="days"></span>
+            <span class="hours"></span>
+            <span class="min"></span>
+            <span class="sec"></span>
+        </div>
+    </div>
+
+    <script>
+        var count = document.querySelector('.count');
+        var days = document.querySelector('.days');
+        var hours = document.querySelector('.hours');
+        var min = document.querySelector('.min');
+        var sec = document.querySelector('.sec');
+
+
+        function init() {
+
+            var target = new Date(2019, 10, 11).getTime();
+            var now = new Date().getTime();
+            var mistiming = target - now;
+            //天 时 分 秒
+            var timeS = parseInt(mistiming / 1000);
+            var d = parseInt(timeS / (60 * 60 * 24));
+            var resD = parseInt(timeS % (60 * 60 * 24));
+            var h = parseInt(resD / (60 * 60));
+            var resH = parseInt(timeS % (60 * 60))
+            var m = parseInt(resH / 60);
+            var s = parseInt(timeS % 60);
+
+            days.innerText = d < 10 ? '0'+d : d;
+            hours.innerText = h < 10 ? '0'+h : h;
+            min.innerText = m < 10 ? '0'+m : m;
+            sec.innerText = s < 10 ? '0'+s : s;
+        }
+        init();
+        setInterval(function () {
+            init();
+        }, 1000)
+    </script>
+</body>
+
+</html>

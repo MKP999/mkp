@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .stage {
+            width: 600px;
+            height: 100px;
+            background: #e83632;
+            padding: 20px;
+        }
+
+        .stage ul {
+            float: left;
+            margin: 0 10px;
+        }
+
+        .stage ul::after {
+            content: ':';
+            font-size: 40px;
+            font-weight: bolder;
+            line-height: 100px;
+        }
+
+        .stage ul:last-child::after {
+            content: '';
+        }
+
+        .stage ul li {
+            width: 70px;
+            height: 100px;
+            background: url('./02/num1.png');
+            background-position-x: -32px;
+            background-position-y: 0px;
+            float: left;
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stage">
+        <!-- <h3>距离元旦还有</h3> -->
+
+        <ul class="hour">
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="min">
+            <li></li>
+            <li></li>
+        </ul>
+        <ul class="sec">
+            <li></li>
+            <li></li>
+        </ul>
+
+
+    </div>
+    <script>
+        function init() {
+            this.stage = document.querySelector('.stage');
+            this.hour = document.querySelectorAll('.hour li');
+            this.min = document.querySelectorAll('.min li');
+            this.sec = document.querySelectorAll('.sec li');
+            this.show = function (dom, num) {
+                dom.style.backgroundPositionY = num * -100 + 'px';
+            }
+
+            var _this = this;
+            setInterval(function () {
+                _this.h = new Date().getHours().toString();
+                h = h < 10 ? '0' + h : h;
+                _this.m = new Date().getMinutes().toString();
+                m = m < 10 ? '0' + m : m;
+                _this.s = new Date().getSeconds().toString();
+                s = s < 10 ? '0' + s : s;
+
+                _this.hour.forEach(function (li, index, lis) {
+                    // console.log(h);
+                    _this.show(li, h[index]);
+                });
+                _this.min.forEach(function (li, index, lis) {
+                    _this.show(li, m[index]);
+                });
+                _this.sec.forEach(function (li, index, lis) {
+                    // console.log(s);
+                    _this.show(li, s[index]);
+                });
+            });
+        }
+
+        init();
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
