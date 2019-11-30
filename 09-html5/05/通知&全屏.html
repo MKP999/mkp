@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="btn">发起通知</button>
+    <video src="https://www.runoob.com/try/demo_source/movie.ogg" autoplay loop></video>
+    <button class="fullscreen">全屏</button>
+    <script>
+        document.querySelector('button.btn').onclick = function () {
+            notifyMe();
+
+        }
+        function notifyMe() {
+            Notification.requestPermission(function (promission) {
+                console.log(promission);
+                if(promission == 'granted'){
+                    var notification = new Notification('郑重宣布',{
+                        body: '这是一条通知！',
+                        icon: './img/compatible_chrome.gif'
+                    })
+
+                    notification.onclick = function (event) {
+                        console.log(event);
+                        window.location.assign('http://www.baidu.com');
+                      }
+                }else if(promission != 'granted'){
+                    
+                    alert('我必须通知你！！！');
+              }
+              })
+            
+        }
+
+        document.querySelector('button.fullscreen').onclick = function () {
+            document.querySelector('video').requestFullscreen();
+          }
+
+          document.querySelector('video').onclick = function () {
+              this.requestFullscreen();
+            }
+
+
+    </script>
+</body>
+
+</html>
