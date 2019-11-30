@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<style>
+			.stage {
+			}
+			.stage .main {
+				width: 400px;
+				float: left;
+				background: lightblue;
+				position: relative;
+                /* overflow: hidden; */
+			}
+			.stage .main img {
+				width: 100%;
+				vertical-align: middle;
+			}
+			.stage .main .mask {
+				width: 200px;
+				height: 200px;
+				background: rgba(0, 0, 0, 0.5);
+				position: absolute;
+				bottom: 0;
+				right: 0;
+
+				pointer-events: none;
+				/* 鼠标穿透 */
+			}
+			.stage .zoom {
+				float: left;
+				width: 400px;
+				height: 400px;
+				background: url("./images/banner1.jpg") no-repeat;
+				background-size: 200% auto;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="stage">
+			<div class="main">
+				<img src="./images/banner1.jpg" alt="" />
+				<div class="mask"></div>
+			</div>
+			<div class="zoom"></div>
+		</div>
+
+		<script>
+			// 先定好 图片放大倍数 是 2
+
+			var main = document.querySelector(".main");
+			var mask = document.querySelector(".mask");
+			var zoom = document.querySelector(".zoom");
+			main.onmousemove = function(e) {
+				console.log(e.offsetX, e.offsetY);
+				// 鼠标相对 main或 main里面的某个子盒子 偏移的值
+				// 需要排除 mask这个盒子
+
+                if (e.offsetX > 300) {
+                    return
+                }
+                if (e.offsetY > 300) {
+                    return
+                }
+                if (e.offsetX < 100) {
+                    return
+                }
+                if (e.offsetY < 100) {
+                    return
+                }
+
+				// 遮罩层移动 注意居中
+				mask.style.top = e.offsetY - 100 + "px";
+				mask.style.left = e.offsetX - 100 + "px";
+
+				// zoom层移动
+
+				zoom.style.backgroundPositionY = (e.offsetY - 100) * -2 + "px";
+				zoom.style.backgroundPositionX = (e.offsetX - 100) * -2 + "px";
+			};
+		</script>
+	</body>
+</html>
