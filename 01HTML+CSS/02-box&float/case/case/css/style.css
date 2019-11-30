@@ -1,0 +1,56 @@
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.nav {
+    background: lightblue;
+    width: 1140px;
+    overflow: hidden;
+    margin: 0 auto;
+    line-height: 60px;
+    color: white;
+}
+/* 没有空格 意思是 有一个元素是ul 并且这个元素class 是menu */
+.nav ul.menu {
+
+}
+.nav ul.menu li {
+    float: left;
+    margin: 0 15px;
+}
+.nav ul.menu li::after {
+    content: '/';
+    margin-left: 15px;
+}
+.nav ul.menu li:last-child::after {
+    content: none;
+}
+.nav ul.menu li a {
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.nav ul.menu li:first-child a {
+    border-top: 4px solid yellow;
+    color: yellow;
+}
+.nav ul.menu li a:hover { 
+    border-top: 4px solid yellow;
+    color: yellow;
+}
+
+
+.nav form.search input {
+    border: 1px solid white;
+    outline: none;
+    background: url('../images/search.png') transparent no-repeat;
+    background-position: right center;
+    padding: 8px 10px;
+    margin-right: 15px;
+    color: white;
+}
+.nav form.search input::placeholder {
+    color: white;
+}

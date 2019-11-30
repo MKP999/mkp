@@ -1,0 +1,103 @@
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.nav{
+    width: 1140px;
+    background: rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+    overflow: hidden;
+    line-height: 60px;
+}
+.nav .menu li{
+    float: left;
+}
+.nav .menu li a{
+    text-decoration: none;
+    color:white;
+    margin: 0 15px;
+    transition: all 0.5s;
+}
+.nav .menu li::after{
+    content: '/';
+    color: white;
+}
+.nav .menu li:last-child::after{
+    content:none;
+}
+.nav .menu li a:hover{
+    border-top: 4px solid yellow;
+    color: yellow;
+}
+.nav .menu li:first-child a{
+    border-top: 4px solid yellow;
+    color: yellow;
+}
+.search input{
+    padding: 6px 10px;
+    color: white;
+    background-color: transparent;
+    outline: none;
+    margin-right: 15px;
+    border: 1px solid white;
+    background-image: url('./images/search.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+.nav form.search input::placeholder{
+    color:white;
+}
+
+header{
+    background:url(../../cultivation/images/banner.jpg) no-repeat;
+    background-size: cover; 
+    background-position: top center;
+}
+header .banner h1{
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    width: 200px;
+    font-size: 48px;
+    margin: 150px auto;
+    color: white;
+
+}
+header ul.gird{
+    width: 1140px;
+    overflow: hidden;
+    margin: 0 auto;
+    position: relative;
+    top: 120px;
+    left: 0;
+}
+header ul.gird .card{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+header ul.gird .content{
+    background: #16A667;
+    margin: 0 15px;
+    color: white;
+    padding: 30px;
+}
+header ul.gird .content img{
+    border: 8px solid white;
+    border-radius: 50%;
+    padding: 15px;
+}
+header ul.gird .content img:hover{
+    transform: rotateY(360deg);
+    transition: all 0.5s;
+}
+header ul.gird .content h3{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 2em;
+}
+header ul.gird .content p{
+    line-height: 1.5em;
+    font-size: 14px;
+}
