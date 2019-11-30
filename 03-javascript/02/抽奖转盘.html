@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .content {
+            width: 650px;
+            height: 600px;
+            background: url('./02/img/turntable-bg.jpg') no-repeat;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .content img {
+            position: absolute;
+        }
+
+        .turntable {
+            top: 58px;
+            left: 116px;
+            /* transform: rotate(360deg);
+            transition: all 2s; */
+        }
+
+        .pointer {
+            top: 144px;
+            left: 249px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="content">
+        <img src="./02/img/turntable.png" alt="" class="turntable">
+        <img src="./02/img/pointer.png" alt="" class="pointer">
+    </div>
+
+    <script>
+        var turntable = document.getElementsByClassName('turntable')[0];
+        // var turntable = document.querySelector(".turntable")
+        var pointer = document.getElementsByClassName('pointer')[0];
+
+        //点击事件 防抖
+        pointer.addEventListener('click', function x() {
+            var randomNum = getRandomNum();
+            var numCode = getNumCode(randomNum);
+            console.log(randomNum, numCode);
+            exchangePic(numCode);
+
+            pointer.removeEventListener('click',  x);
+            setTimeout(function(){
+                pointer.addEventListener('click', x);
+            }, 4500);
+
+        });
+
+        // pointer.onclick = function () {
+        //     var randomNum = getRandomNum();
+        //     var numCode = getNumCode(randomNum);
+        //     console.log(randomNum, numCode);
+        //     exchangePic(numCode);
+
+        // }
+
+
+
+        function getRandomNum() {
+            return Math.floor(Math.random() * 100);
+        }
+
+        function getNumCode(n) {
+            if (n < 3) {
+                return { code: 1, text: "一等奖" };
+            } else if (n < 8) {
+                return { code: 2, text: "二等奖" };
+            } else if (n < 15) {
+                return { code: 3, text: "三等奖" };
+            } else if (n < 25) {
+                return { code: 4, text: "四等奖" };
+            } else if (n < 40) {
+                return { code: 5, text: "五等奖" };
+            } else if (n < 65) {
+                return { code: 6, text: "六等奖" };
+            } else {
+                return { code: 7, text: "未中奖" };
+            }
+
+        }
+        function exchangePic(obj) {
+            // console.log(obj);
+
+            var d = (360 / 7 / 2) + (360 / 7) * (obj.code - 1);
+            console.log(d);
+
+            turntable.style.transition = "all 4s";
+            turntable.style.transform = "rotate(" + (d + 360 * 10) + "deg)";
+            console.log(turntable.style.transform);
+
+
+            setTimeout(function () {    
+                turntable.style.transition = "none";
+                turntable.style.transform = "rotate(" + d + "deg)";
+                alert(obj.text)
+            }, 4500);
+            
+        }
+
+    </script>
+</body>
+
+</html>
