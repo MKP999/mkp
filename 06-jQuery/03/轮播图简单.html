@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" />
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+		<style>
+			.swiper {
+				width: 300px;
+				height: 200px;
+				position: relative;
+				background: lightblue;
+			}
+			.swiper .content li {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+			}
+			.swiper .content li:first-child {
+				position: relative;
+			}
+			.swiper .content li img {
+				width: 100%;
+				vertical-align: middle;
+			}
+			.swiper .pagenation {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				text-align: center;
+			}
+			.swiper .pagenation span {
+				width: 10px;
+				height: 10px;
+				background: red;
+				display: inline-block;
+				line-height: 20px;
+				margin: 0 5px;
+			}
+			.swiper .pagenation span.active {
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper">
+			<ul class="content">
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/1.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/2.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/3.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/4.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/5.jpg" alt="" />
+				</li>
+			</ul>
+			<div class="pagenation"></div>
+			<div class="controler"></div>
+		</div>
+
+		<script>
+			//    var node  = document.createElement('span')
+
+			// $(selector).each(function(index,element))
+			// $.each( object, callback )
+
+			$(".content li")
+				.each(function(index, element) {
+					$(".pagenation").append("<span></span>");
+				})
+				.eq(0)
+				.fadeIn()
+				.siblings()
+				.fadeOut();
+			$(".swiper .pagenation span")
+				.click(function() {
+					$(this)
+						.addClass("active")
+						.siblings()
+						.removeClass("active");
+					// console.log();
+					$(".content li")
+						.eq($(this).index())
+						.fadeIn()
+						.siblings()
+						.fadeOut();
+				})
+				.eq(0)
+				.addClass("active")
+				.siblings()
+				.removeClass("active");
+
+			// console.log(x);
+		</script>
+	</body>
+</html>

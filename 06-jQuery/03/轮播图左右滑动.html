@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/minireset.css/0.0.2/minireset.min.css" />
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+		<style>
+			.swiper {
+				width: 300px;
+				height: 200px;
+				background: lightblue;
+				position: relative;
+				overflow: hidden;
+			}
+			.swiper .content {
+				width: 500%;
+				overflow: hidden;
+				/* transition: all 0.3s; */
+			}
+			.swiper .content li {
+				width: 20%;
+				float: left;
+			}
+			.swiper .content li img {
+				width: 100%;
+				vertical-align: middle;
+			}
+			.swiper .pagenation {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				text-align: center;
+			}
+			.swiper .pagenation span {
+				width: 10px;
+				height: 10px;
+				background: red;
+				display: inline-block;
+				line-height: 20px;
+				margin: 0 5px;
+			}
+			.swiper .pagenation span.active {
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="swiper">
+			<ul class="content">
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/1.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/2.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/3.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/4.jpg" alt="" />
+				</li>
+				<li>
+					<img src="http://demo.sc.chinaz.net/Files/DownLoad/webjs1/201908/jiaoben6983/images/5.jpg" alt="" />
+				</li>
+			</ul>
+			<div class="pagenation"></div>
+			<div class="controler">
+				<span class="prev">prev</span>
+				<span class="next">next</span>
+			</div>
+		</div>
+
+		<script>
+			$(".content li").each(function(index, element) {
+				// $('.swiper .pagenation').append('<span></span>')
+				var dotJQ = index == 0 ? $("<span class='active'></span>") : $("<span></span>");
+				dotJQ.appendTo(".swiper .pagenation").click(function() {
+					// console.log($(this).index());
+					current = $(this).index();
+					showPic();
+				});
+			});
+
+			var current = 0;
+			var canClick = true;
+			function nextPic() {
+				if (canClick) {
+					// console.log('xxx');
+					// current++;
+					canClick = false;
+					current = current >= 5 - 1 ? 0 : ++current;
+					// $(".content").css("margin-left", current * -100 + "%");
+					// $(".content").css({"margin-left":current * -100 + "%", 'border':'1px solid red'})
+					showPic();
+				}
+			}
+			function prevPic() {
+				if (canClick) {
+					canClick = false;
+					current = current <= 0 ? 5 - 1 : --current;
+					showPic();
+				}
+			}
+
+			function showPic() {
+				$(".content").animate({ "margin-left": current * -100 + "%" }, function() {
+					canClick = true;
+				});
+				$(".swiper .pagenation span")
+					.eq(current)
+					.addClass("active")
+					.siblings()
+					.removeClass("active");
+			}
+
+			$(".controler .next").click(nextPic);
+			$(".controler .prev").click(prevPic);
+
+			var id = setInterval(nextPic, 3000);
+			$(".swiper").mouseenter(function() {
+				clearInterval(id);
+			});
+			$(".swiper").mouseleave(function() {
+				var id = setInterval(nextPic, 3000);
+			});
+
+			// $(xxx).append(xxx)
+			// xxx.appendTo(xxx)
+			// .css("margin-left");
+			// .css("margin-left", current * -100 + "%");
+			// .css({属性：属性值， 属性：属性值});
+			// .animate({属性：属性值， 属性：属性值}, 时间，速度曲线，回调);
+		</script>
+	</body>
+</html>
