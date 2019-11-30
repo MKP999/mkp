@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Document</title>
+		<style>
+			body,
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+			img {
+				width: 100%;
+				vertical-align: middle;
+			}
+			.slider {
+				width: 500px;
+				margin: 0 auto;
+				background: lightblue;
+				position: relative;
+			}
+			.content li {
+				opacity: 0;
+				transition: all 1s;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+			.content li:first-child {
+				opacity: 1;
+				position: static;
+			}
+			.paganition {
+				position: absolute;
+				top: 50%;
+				left: 0;
+				width: 100%;
+			}
+			.paganition span {
+				background: red;
+			}
+			.paganition span:last-child {
+				float: right;
+			}
+			.dot {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				text-align: center;
+			}
+			.dot span {
+				width: 10px;
+				height: 10px;
+				display: inline-block;
+				background: red;
+				margin: 10px;
+			}
+			.dot span.active {
+				background: blue;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="slider">
+			<ul class="content">
+				<li><img src="./images/lunbo1.jpg" alt="" /></li>
+				<li><img src="./images/lunbo2.jpg" alt="" /></li>
+				<li><img src="./images/lunbo3.jpg" alt="" /></li>
+			</ul>
+			<div class="paganition">
+				<span>prev</span>
+				<span>next</span>
+			</div>
+			<div class="dot"></div>
+		</div>
+
+		<script>
+			var lis = document.querySelectorAll(".content li");
+			var prev = document.querySelector(".paganition span:first-child");
+			var next = document.querySelector(".paganition span:last-child");
+			var dot = document.querySelector(".dot");
+			var current = 0;
+
+			// 没有条件创造条件
+
+			// 根据 图片个数生成 点点 顺带每个点点都保存一个 自身的索引
+			lis.forEach(function(element, index) {
+				// 创建节点
+				var node = document.createElement("span");
+				if (index == 0) {
+					// 如果是第一个小点点 给个高亮  默认显示的是第一张图片
+					element.className = "active";
+				}
+				// 这里 xxx 相当于 之前的title 只是保存索引号
+				node.xxx = index;
+				// 追加节点到dot里面
+				dot.appendChild(node);
+			});
+
+			// 生成之后才能 获取点点
+			var dots = document.querySelectorAll(".dot span");
+
+			// 高亮 某个点点的方法
+			function activeDot(index) {
+				dots.forEach(function(e, i) {
+					e.className = "";
+				});
+				dots[index].className = "active";
+			}
+
+			// 切换某一张图片的 方法
+			function toggleSlider(index) {
+				for (var i = 0; i < lis.length; i++) {
+					lis[i].style.opacity = "0";
+				}
+				lis[index].style.opacity = "1";
+
+				activeDot(index);
+			}
+
+			next.onclick = function() {
+				current++;
+				current = current > lis.length - 1 ? 0 : current;
+				toggleSlider(current);
+			};
+
+			prev.onclick = function() {
+				current--;
+				current = current < 0 ? lis.length - 1 : current;
+				toggleSlider(current);
+			};
+
+			// 所有点点 添加点击事件 点击点点的时候找到这个点点的索引号 切换对应图片
+			for (var i = 0; i < dots.length; i++) {
+				dots[i].onclick = function() {
+					// console.log(this.xxx);
+
+					toggleSlider(this.xxx);
+					current = this.xxx
+				};
+			}
+		</script>
+	</body>
+</html>
